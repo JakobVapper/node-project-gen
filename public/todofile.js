@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
           li.className = 'todo-item';
           li.innerHTML = `
             <span>${todo.title}</span>
-            <div>
-              <button onclick="updateTodo(${todo.id}, '${todo.title}', ${todo.completed})">Update</button>
-              <button onclick="deleteTodo(${todo.id})">Delete</button>
+            <div class="flex space-x-2 mt-2">
+              <button class="text-amber-500 hover:text-amber-400" onclick="updateTodo(${todo.id}, '${todo.title}', ${todo.completed})">Update</button>
+              <button class="text-red-500 hover:text-red-400" onclick="deleteTodo(${todo.id})">Delete</button>
             </div>
           `;
           todoList.appendChild(li);

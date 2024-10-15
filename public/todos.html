@@ -4,35 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .todo-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .todo-item button {
-      margin-left: 10px;
-    }
-  </style>
+  <link href="output.css" rel="stylesheet">
 </head>
-<body>
-  <h1>Todo List</h1>
-  <form id="todoForm">
-    <input type="text" id="todoTitle" placeholder="Enter todo title" required>
-    <button type="submit">Add Todo</button>
-  </form>
-  <ul id="todoList"></ul>
-  <script src="todofile.js"></script>
-  <script>
-    // Check if the user is logged in
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // Redirect to the login page if not logged in
-      window.location.href = 'index.html';
-    }
-  </script>
+<body class="flex place-content-center bg-orange-50 pt-20">
+  <div class="border-2 w-[400px] h-auto bg-white p-8">
+    <h1 class="text-3xl font-semibold flex justify-center mb-8">Todo List</h1>
+    <form id="todoForm" class="flex flex-col space-y-4 mb-4">
+      <input class="border p-2 w-full" type="text" id="todoTitle" placeholder="Enter todo title" required>
+      <button class="bg-amber-500 text-white p-2 w-full hover:bg-amber-400" type="submit">Add Todo</button>
+    </form>
+    <button class="border-2 border-black text-black p-2 w-full hover:border-gray-400 mt-4" onclick="redirectToWeather()">Go to Weather</button>
+    <ul id="todoList" class="list-disc pl-5 pt-5"></ul>
+    <script src="todofile.js"></script>
+    <script>
+      // Check if the user is logged in
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // Redirect to the login page if not logged in
+        window.location.href = 'index.html';
+      }
+      function redirectToWeather() {
+        window.location.href = 'weather.html';
+      }
+    </script>
+  </div>
 </body>
 </html>
