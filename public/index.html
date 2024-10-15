@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+  <p id="result"></p>
+  <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      try {
+        const response = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          window.location.href = '/weather.html'; // Redirect to the weather page
+        } else {
+          document.getElementById('result').innerText = data.error;
+        }
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error occurred while logging in';
+      }
+    });
+  </script>
+</body>
+</html>

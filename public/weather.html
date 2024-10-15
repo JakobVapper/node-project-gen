@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Weather</title>
+</head>
+<body>
+  <h1>City Weather</h1>
+  <input type="text" id="cityName" placeholder="Enter city name">
+  <button onclick="fetchTemperature()">Get Weather</button>
+  <p id="result"></p>
+  <button onclick="redirectToTodos()">Go to Todos</button>
+  <script src="script.js"></script>
+  <script>
+    // Check if the user is logged in
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Redirect to the login page if not logged in
+      window.location.href = 'index.html';
+    }
+
+    async function fetchTemperature() {
+      const cityName = document.getElementById('cityName').value;
+      try {
+        const response = await fetch(`/weather/${cityName}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        if (response.ok) {
+          document.getElementById('result').innerText = `Temperature in ${cityName}: ${data.temp}°C`;
+        } else {
+          document.getElementById('result').innerText = 'Failed to fetch temperature';
+        }
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error occurred while fetching temperature';
+      }
+    }
+
+    function redirectToTodos() {
+      window.location.href = `todos.html?token=${token}`;
+    }
+  </script>
+</body>
+</html>
